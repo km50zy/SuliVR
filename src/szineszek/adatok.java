@@ -275,6 +275,7 @@ public class adatok extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_jTable1MouseClicked
 
+    //Ez a gomb végzi az adatok módosítását
     private void jbtnModositasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnModositasActionPerformed
     String nevModosit = jtxtNev.getText();
     Boolean ferfiModosit = Boolean.parseBoolean(jtxtFerfi.getText());
@@ -283,15 +284,15 @@ public class adatok extends javax.swing.JFrame {
     String szulorszModosit = jtxtSzulOrsz.getText();
     Integer filmszamModosit = Integer.parseInt(jtxtFilmszam.getText());
         
-//Csatlakozás az adatbázishoz
+    //Csatlakozás az adatbázishoz
         String host = "jdbc:mysql://localhost:3306/javaszinesz?zeroDateTimeBehavior=convertToNull";
         String username = "root";
         String password = "";
 
         try {
             Connection con = (Connection) DriverManager.getConnection(host, username, password);
-            String sql = "UPDATE javaszinesz SET NEV='"+nevModosit+"' ,FERFI="+ferfiModosit+",SZULIDO='"+szulidoModosit+"',SZULHELY='"+szulhelyModosit+"',SZULORSZ='"+szulorszModosit+"',FILMSZAM="+filmszamModosit+""
-            + "WHERE NEV='"+nev+"'" ;
+            String sql = " UPDATE javaszinesz SET NEV='"+nevModosit+"' ,FERFI="+ferfiModosit+",SZULIDO='"+szulidoModosit+"',SZULHELY='"+szulhelyModosit+"',SZULORSZ='"+szulorszModosit+"',FILMSZAM="+filmszamModosit+" "
+            + "WHERE NEV='"+nev+"' AND SZULIDO='"+szulido+"' " ;
             Statement stmt = con.createStatement();
             stmt.executeUpdate(sql);
             stmt.close();
